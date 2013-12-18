@@ -43,14 +43,14 @@ static NSString *APIKey = @"1dd17dde0fed7286935d83875fcc17dd";
         NSURL *largePhotoURL = [NSURL URLWithString:largePhotoURLString];
         NSString *photoTitle = [photo objectForKey:@"title"];
 
-        [urlsArray addObject:@{@"thumbnail":thumbnailPhotoURL, @"large":largePhotoURL, @"title":photoTitle}];
+        [urlsArray addObject:[@{@"thumbnail":thumbnailPhotoURL, @"large":largePhotoURL, @"title":photoTitle} mutableCopy]];
     }];
 
     [self.delegate returnedPhotos:urlsArray];
 }
 
 -(void)searchPhotosWithText:(NSString *)searchText {
-    NSString *urlString = [NSString stringWithFormat:@"%@?api_key=%@&method=flickr.photos.search&text=%@&format=json&nojsoncallback=1&per_page=25", APIURL, APIKey, [searchText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *urlString = [NSString stringWithFormat:@"%@?api_key=%@&method=flickr.photos.search&text=%@&format=json&nojsoncallback=1&per_page=25&safe_search=1", APIURL, APIKey, [searchText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURL *photoRequestURL = [NSURL URLWithString:urlString];
     NSURLRequest *photoRequest = [[NSURLRequest alloc] initWithURL:photoRequestURL];
     NSURLSessionDataTask *taskRequest = [self.networkSession dataTaskWithRequest:photoRequest];

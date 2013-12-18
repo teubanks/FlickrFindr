@@ -18,10 +18,4 @@
 @property (weak) id delegate;
 
 -(void)searchPhotosWithText:(NSString*)searchText;
-
-//-(NSString*)formatAPIErrorsFromDictionary:(NSDictionary*)responseDictionary;
-//-(NSString*)apiURLStringWithPath:(NSString*)path;
-//-(void)sendPostRequestWithDictionary:(NSDictionary*)postDictionary toPath:(NSString*)path;
-//-(void)sendGetRequestWithDictionary:(NSDictionary*)postDictionary toPath:(NSString*)path;
-//-(void)requestWithDictionary:(NSDictionary*)dictionary method:(NSString*)method toPath:(NSString*)path;
 @end

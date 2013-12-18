@@ -37,6 +37,8 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    CGRect photoViewFrame = CGRectMake(0, 0, self.largeImage.size.width, self.largeImage.size.height);
+    [self.photoView setFrame:photoViewFrame];
     self.photoView.image = self.largeImage;
     self.titleText.text = self.titleString;
 }

@@ -63,8 +63,8 @@
 
 #pragma mark - Search
 -(void)showSearch {
-    [self.navigationController.view addSubview:self.searchBar];
     [self.navigationController.view addSubview:self.darkeningView];
+    [self.navigationController.view addSubview:self.searchBar];
 
     [self.searchBar becomeFirstResponder];
     [UIView animateWithDuration:0.3f animations:^{
@@ -90,6 +90,8 @@
     [self.apiInterface searchPhotosWithText:searchBar.text];
     [self.view addSubview:self.fetchingPhotosIndicator];
     [self.fetchingPhotosIndicator startAnimating];
+    self.photos = @[];
+    [self.collectionView reloadData];
     [self dismissSearch];
 }
 
@@ -113,18 +115,26 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
 
-    NSDictionary *currentPhoto = [self.photos objectAtIndex:indexPath.row];
+    NSMutableDictionary *currentPhoto = [self.photos objectAtIndex:indexPath.row];
 
-    UIActivityIndicatorView *downloadIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [downloadIndicator setFrame:CGRectMake(50, 50, downloadIndicator.frame.size.width, downloadIndicator.frame.size.height)];
-    [cell addSubview:downloadIndicator];
-    [downloadIndicator startAnimating];
-    [self.imageFetchQueue addOperationWithBlock:^{
-        cell.thumbnail.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[currentPhoto objectForKey:@"thumbnail"]]];
+    // cache the downloaded thumbnail
+    if([currentPhoto objectForKey:@"thumbnail_data"]) {
+        cell.thumbnail.image = [UIImage imageWithData:[currentPhoto objectForKey:@"thumbnail_data"]];
         cell.shortTitle.text = [currentPhoto objectForKey:@"title"];
-        [downloadIndicator stopAnimating];
-        [downloadIndicator removeFromSuperview];
-    }];
+    } else {
+        UIActivityIndicatorView *downloadIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [downloadIndicator setFrame:CGRectMake(50, 50, downloadIndicator.frame.size.width, downloadIndicator.frame.size.height)];
+        [cell addSubview:downloadIndicator];
+        [downloadIndicator startAnimating];
+        [self.imageFetchQueue addOperationWithBlock:^{
+            NSData *photoData = [NSData dataWithContentsOfURL:[currentPhoto objectForKey:@"thumbnail"]];
+            [currentPhoto setObject:photoData forKey:@"thumbnail_data"];
+            cell.thumbnail.image = [UIImage imageWithData:photoData];
+            cell.shortTitle.text = [currentPhoto objectForKey:@"title"];
+            [downloadIndicator stopAnimating];
+            [downloadIndicator removeFromSuperview];
+        }];
+    }
 
     return cell;
 }
@@ -134,11 +144,20 @@
     if([[segue identifier] isEqualToString:@"photoDetailSegue"]){
         NSIndexPath *selectedIndexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
 
-        NSDictionary *currentPhoto = [self.photos objectAtIndex:selectedIndexPath.row];
         PhotoDetailViewController *photoDetails = [segue destinationViewController];
-        UIImage *largeImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[currentPhoto objectForKey:@"large"]]];
-        photoDetails.largeImage = largeImage;
+
+        NSMutableDictionary *currentPhoto = [self.photos objectAtIndex:selectedIndexPath.row];
         photoDetails.titleString = [currentPhoto objectForKey:@"title"];
+
+        // cache large photo data
+        if([currentPhoto objectForKey:@"large_data"]){
+            photoDetails.largeImage = [UIImage imageWithData:[currentPhoto objectForKey:@"large_data"]];
+        } else {
+            NSData *largePhotoData = [NSData dataWithContentsOfURL:[currentPhoto objectForKey:@"large"]];
+            [currentPhoto setObject:largePhotoData forKey:@"large_data"];
+            UIImage *largeImage = [UIImage imageWithData:largePhotoData];
+            photoDetails.largeImage = largeImage;
+        }
     }
 }
 
