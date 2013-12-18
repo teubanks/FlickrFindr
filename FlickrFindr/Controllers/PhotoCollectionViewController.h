@@ -10,4 +10,6 @@
 
 @interface PhotoCollectionViewController : UICollectionViewController <UISearchBarDelegate>
 @property (strong, nonatomic) NSArray *photos;
+@property (strong, nonatomic) UIView *darkeningView;
+@property (strong, nonatomic) UISearchBar *searchBar;
 @end

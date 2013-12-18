@@ -11,7 +11,8 @@
 #import "PhotoDetailViewController.h"
 
 @interface PhotoCollectionViewController ()
-
+@property (assign) CGRect hiddenSearchBarFrame;
+@property (assign) CGRect visibleSearchBarFrame;
 @end
 
 @implementation PhotoCollectionViewController
@@ -30,28 +31,43 @@
     [super viewDidLoad];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch)];
     [self.navigationItem setRightBarButtonItem:rightButton];
+
+    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+
+    self.hiddenSearchBarFrame = CGRectMake(0, -44, self.view.bounds.size.width, 44);
+    self.visibleSearchBarFrame = CGRectMake(0, statusBarFrame.size.height, self.view.bounds.size.width, 44);
+
+    self.searchBar = [[UISearchBar alloc] initWithFrame:self.hiddenSearchBarFrame];
+    [self.searchBar setDelegate:self];
+
+    self.darkeningView = [[UIView alloc] initWithFrame:self.view.frame];
+    [self.darkeningView setAlpha:0.0f];
+    [self.darkeningView setBackgroundColor:[UIColor grayColor]];
+    UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSearch)];
+    [self.darkeningView addGestureRecognizer:dismissTap];
 }
 
 -(void)showSearch {
-    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+    [self.navigationController.view addSubview:self.searchBar];
+    [self.navigationController.view addSubview:self.darkeningView];
 
-    CGRect hiddenSearchBarFrame = CGRectMake(0, -44, self.view.bounds.size.width, 44);
-    CGRect visibleSearchBarFrame = CGRectMake(0, statusBarFrame.size.height, self.view.bounds.size.width, 44);
-
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:hiddenSearchBarFrame];
-    [searchBar setDelegate:self];
-    [self.navigationController.view addSubview:searchBar];
-
-    UIView *darkeningView = [[UIView alloc] initWithFrame:self.view.frame];
-    [darkeningView setAlpha:0.0f];
-    [darkeningView setBackgroundColor:[UIColor grayColor]];
-    [self.navigationController.view addSubview:darkeningView];
-
+    [self.searchBar becomeFirstResponder];
     [UIView animateWithDuration:0.3f animations:^{
-        [searchBar setFrame:visibleSearchBarFrame];
-        [darkeningView setAlpha:0.2f];
+        [self.searchBar setFrame:self.visibleSearchBarFrame];
+        [self.darkeningView setAlpha:0.2f];
+    }];
+}
+
+-(void)dismissSearch {
+    if([self.searchBar isFirstResponder]){
+        [self.searchBar resignFirstResponder];
+    }
+    [UIView animateWithDuration:0.3f animations:^{
+        [self.searchBar setFrame:self.hiddenSearchBarFrame];
+        [self.darkeningView setAlpha:0.0f];
     } completion:^(BOOL finished) {
-        [searchBar becomeFirstResponder];
+        [self.searchBar removeFromSuperview];
+        [self.darkeningView removeFromSuperview];
     }];
 }
 
