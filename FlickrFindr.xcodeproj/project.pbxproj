@@ -15,13 +15,16 @@
 		AD90383D1861FCFB0036D268 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD90383C1861FCFB0036D268 /* AppDelegate.m */; };
 		AD9038401861FCFB0036D268 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD90383E1861FCFB0036D268 /* Main_iPhone.storyboard */; };
 		AD9038431861FCFB0036D268 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD9038411861FCFB0036D268 /* Main_iPad.storyboard */; };
-		AD9038461861FCFB0036D268 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9038451861FCFB0036D268 /* ViewController.m */; };
 		AD9038481861FCFB0036D268 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD9038471861FCFB0036D268 /* Images.xcassets */; };
 		AD90384F1861FCFB0036D268 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD90384E1861FCFB0036D268 /* XCTest.framework */; };
 		AD9038501861FCFB0036D268 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD90382C1861FCFB0036D268 /* Foundation.framework */; };
 		AD9038511861FCFB0036D268 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9038301861FCFB0036D268 /* UIKit.framework */; };
 		AD9038591861FCFB0036D268 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD9038571861FCFB0036D268 /* InfoPlist.strings */; };
 		AD90385B1861FCFB0036D268 /* FlickrFindrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD90385A1861FCFB0036D268 /* FlickrFindrTests.m */; };
+		AD9038691861FD430036D268 /* APIInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9038681861FD430036D268 /* APIInterface.m */; };
+		AD90386C186203250036D268 /* PhotoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD90386B186203250036D268 /* PhotoCollectionViewController.m */; };
+		AD90386F1862057E0036D268 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD90386E1862057E0036D268 /* PhotoCell.m */; };
+		AD903872186209210036D268 /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD903871186209210036D268 /* PhotoDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,14 +50,20 @@
 		AD90383C1861FCFB0036D268 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AD90383F1861FCFB0036D268 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		AD9038421861FCFB0036D268 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		AD9038441861FCFB0036D268 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AD9038451861FCFB0036D268 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AD9038471861FCFB0036D268 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AD90384D1861FCFB0036D268 /* FlickrFindrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrFindrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD90384E1861FCFB0036D268 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		AD9038561861FCFB0036D268 /* FlickrFindrTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlickrFindrTests-Info.plist"; sourceTree = "<group>"; };
 		AD9038581861FCFB0036D268 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD90385A1861FCFB0036D268 /* FlickrFindrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlickrFindrTests.m; sourceTree = "<group>"; };
+		AD9038671861FD430036D268 /* APIInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APIInterface.h; path = Models/APIInterface.h; sourceTree = "<group>"; };
+		AD9038681861FD430036D268 /* APIInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APIInterface.m; path = Models/APIInterface.m; sourceTree = "<group>"; };
+		AD90386A186203250036D268 /* PhotoCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoCollectionViewController.h; path = Controllers/PhotoCollectionViewController.h; sourceTree = "<group>"; };
+		AD90386B186203250036D268 /* PhotoCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoCollectionViewController.m; path = Controllers/PhotoCollectionViewController.m; sourceTree = "<group>"; };
+		AD90386D1862057E0036D268 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoCell.h; path = Views/PhotoCell.h; sourceTree = "<group>"; };
+		AD90386E1862057E0036D268 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoCell.m; path = Views/PhotoCell.m; sourceTree = "<group>"; };
+		AD903870186209210036D268 /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoDetailViewController.h; path = Controllers/PhotoDetailViewController.h; sourceTree = "<group>"; };
+		AD903871186209210036D268 /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoDetailViewController.m; path = Controllers/PhotoDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,12 +123,11 @@
 		AD9038321861FCFB0036D268 /* FlickrFindr */ = {
 			isa = PBXGroup;
 			children = (
+				AD9038661861FD150036D268 /* Models */,
+				AD9038651861FD0F0036D268 /* Controllers */,
+				AD9038641861FD050036D268 /* Views */,
 				AD90383B1861FCFB0036D268 /* AppDelegate.h */,
 				AD90383C1861FCFB0036D268 /* AppDelegate.m */,
-				AD90383E1861FCFB0036D268 /* Main_iPhone.storyboard */,
-				AD9038411861FCFB0036D268 /* Main_iPad.storyboard */,
-				AD9038441861FCFB0036D268 /* ViewController.h */,
-				AD9038451861FCFB0036D268 /* ViewController.m */,
 				AD9038471861FCFB0036D268 /* Images.xcassets */,
 				AD9038331861FCFB0036D268 /* Supporting Files */,
 			);
@@ -153,6 +161,37 @@
 				AD9038571861FCFB0036D268 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AD9038641861FD050036D268 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AD90383E1861FCFB0036D268 /* Main_iPhone.storyboard */,
+				AD9038411861FCFB0036D268 /* Main_iPad.storyboard */,
+				AD90386D1862057E0036D268 /* PhotoCell.h */,
+				AD90386E1862057E0036D268 /* PhotoCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		AD9038651861FD0F0036D268 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AD90386A186203250036D268 /* PhotoCollectionViewController.h */,
+				AD90386B186203250036D268 /* PhotoCollectionViewController.m */,
+				AD903870186209210036D268 /* PhotoDetailViewController.h */,
+				AD903871186209210036D268 /* PhotoDetailViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		AD9038661861FD150036D268 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AD9038671861FD430036D268 /* APIInterface.h */,
+				AD9038681861FD430036D268 /* APIInterface.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,8 +292,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD9038461861FCFB0036D268 /* ViewController.m in Sources */,
+				AD90386F1862057E0036D268 /* PhotoCell.m in Sources */,
+				AD9038691861FD430036D268 /* APIInterface.m in Sources */,
+				AD90386C186203250036D268 /* PhotoCollectionViewController.m in Sources */,
 				AD90383D1861FCFB0036D268 /* AppDelegate.m in Sources */,
+				AD903872186209210036D268 /* PhotoDetailViewController.m in Sources */,
 				AD9038391861FCFB0036D268 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
