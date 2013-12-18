@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "APIInterface.h"
 
-@interface PhotoCollectionViewController : UICollectionViewController <UISearchBarDelegate>
+@interface PhotoCollectionViewController : UICollectionViewController <UISearchBarDelegate, APIInterfaceDelegate>
 @property (strong, nonatomic) NSArray *photos;
 @property (strong, nonatomic) UIView *darkeningView;
 @property (strong, nonatomic) UISearchBar *searchBar;
+@property (strong, nonatomic) APIInterface *apiInterface;
+@property (strong, nonatomic) NSOperationQueue *imageFetchQueue;
 @end

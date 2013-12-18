@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PhotoCell : UICollectionViewCell
+@property (strong, nonatomic) NSURL *imageURL;
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnail;
 @property (weak, nonatomic) IBOutlet UILabel *shortTitle;
-
 @end

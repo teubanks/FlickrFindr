@@ -9,6 +9,7 @@
 #import "PhotoCollectionViewController.h"
 #import "PhotoCell.h"
 #import "PhotoDetailViewController.h"
+#import "APIInterface.h"
 
 @interface PhotoCollectionViewController ()
 @property (assign) CGRect hiddenSearchBarFrame;
@@ -17,13 +18,22 @@
 
 @implementation PhotoCollectionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+-(instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        self.apiInterface = [[APIInterface alloc] init];
+        [self.apiInterface setDelegate:self];
+
+        self.imageFetchQueue = [[NSOperationQueue alloc] init];
+        [self.imageFetchQueue setMaxConcurrentOperationCount:10];
     }
     return self;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewDidLoad
@@ -47,6 +57,7 @@
     [self.darkeningView addGestureRecognizer:dismissTap];
 }
 
+#pragma mark - Search
 -(void)showSearch {
     [self.navigationController.view addSubview:self.searchBar];
     [self.navigationController.view addSubview:self.darkeningView];
@@ -71,12 +82,18 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.apiInterface searchPhotosWithText:searchBar.text];
+    [self dismissSearch];
 }
 
+#pragma mark - API Interface Delegate
+-(void)returnedPhotos:(NSArray *)photoURLs {
+    self.photos = photoURLs;
+    [self.collectionView reloadData];
+}
+
+#pragma mark - Collection View Delegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
@@ -88,14 +105,23 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
 
-    cell.shortTitle.text = @"placeholder";
+    NSDictionary *currentPhoto = [self.photos objectAtIndex:indexPath.row];
 
-    NSString *imageToLoad = @"nonexistantimage";
-    cell.thumbnail.image = [UIImage imageNamed:imageToLoad];
+    UIActivityIndicatorView *downloadIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [downloadIndicator setFrame:CGRectMake(50, 50, downloadIndicator.frame.size.width, downloadIndicator.frame.size.height)];
+    [cell addSubview:downloadIndicator];
+    [downloadIndicator startAnimating];
+    [self.imageFetchQueue addOperationWithBlock:^{
+        cell.thumbnail.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[currentPhoto objectForKey:@"thumbnail"]]];
+        cell.shortTitle.text = [currentPhoto objectForKey:@"title"];
+        [downloadIndicator stopAnimating];
+        [downloadIndicator removeFromSuperview];
+    }];
 
     return cell;
 }
 
+#pragma mark - Photo Details
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([[sender identifier] isEqualToString:@"photoDetailSegue"]){
         PhotoDetailViewController *photoDetails = (PhotoDetailViewController*)[segue destinationViewController];
