@@ -14,6 +14,7 @@
 @interface PhotoCollectionViewController ()
 @property (assign) CGRect hiddenSearchBarFrame;
 @property (assign) CGRect visibleSearchBarFrame;
+@property (strong, nonatomic) UIBarButtonItem *searchButton;
 @end
 
 @implementation PhotoCollectionViewController
@@ -26,6 +27,17 @@
 
         self.imageFetchQueue = [[NSOperationQueue alloc] init];
         [self.imageFetchQueue setMaxConcurrentOperationCount:10];
+        self.fetchingPhotosIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+
+        UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSearch)];
+        self.darkeningView = [[UIView alloc] init];
+        [self.darkeningView setAlpha:0.0f];
+        [self.darkeningView setBackgroundColor:[UIColor grayColor]];
+        [self.darkeningView addGestureRecognizer:dismissTap];
+        self.searchBar = [[UISearchBar alloc] initWithFrame:self.hiddenSearchBarFrame];
+        [self.searchBar setDelegate:self];
+
+       self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch)];
     }
     return self;
 }
@@ -39,25 +51,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch)];
-    [self.navigationItem setRightBarButtonItem:rightButton];
+    [self.navigationItem setRightBarButtonItem:self.searchButton];
 
-    self.fetchingPhotosIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [self.fetchingPhotosIndicator setFrame:self.view.frame];
+    [self.darkeningView setFrame:self.view.frame];
 
     CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
-
     self.hiddenSearchBarFrame = CGRectMake(0, -44, self.view.bounds.size.width, 44);
     self.visibleSearchBarFrame = CGRectMake(0, statusBarFrame.size.height, self.view.bounds.size.width, 44);
 
-    self.searchBar = [[UISearchBar alloc] initWithFrame:self.hiddenSearchBarFrame];
-    [self.searchBar setDelegate:self];
 
-    self.darkeningView = [[UIView alloc] initWithFrame:self.view.frame];
-    [self.darkeningView setAlpha:0.0f];
-    [self.darkeningView setBackgroundColor:[UIColor grayColor]];
-    UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSearch)];
-    [self.darkeningView addGestureRecognizer:dismissTap];
     [self showSearch];
 }
 
@@ -128,11 +131,13 @@
         [downloadIndicator startAnimating];
         [self.imageFetchQueue addOperationWithBlock:^{
             NSData *photoData = [NSData dataWithContentsOfURL:[currentPhoto objectForKey:@"thumbnail"]];
-            [currentPhoto setObject:photoData forKey:@"thumbnail_data"];
-            cell.thumbnail.image = [UIImage imageWithData:photoData];
-            cell.shortTitle.text = [currentPhoto objectForKey:@"title"];
-            [downloadIndicator stopAnimating];
-            [downloadIndicator removeFromSuperview];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [currentPhoto setObject:photoData forKey:@"thumbnail_data"];
+                cell.thumbnail.image = [UIImage imageWithData:photoData];
+                cell.shortTitle.text = [currentPhoto objectForKey:@"title"];
+                [downloadIndicator stopAnimating];
+                [downloadIndicator removeFromSuperview];
+            });
         }];
     }
 
