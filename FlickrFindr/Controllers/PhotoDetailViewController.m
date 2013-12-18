@@ -37,9 +37,13 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    CGRect photoViewFrame = CGRectMake(0, 0, self.largeImage.size.width, self.largeImage.size.height);
-    [self.photoView setFrame:photoViewFrame];
-    self.photoView.image = self.largeImage;
+    dispatch_queue_t imageLoadQueue = dispatch_queue_create("com.flickrfindr.large_image_load", DISPATCH_QUEUE_PRIORITY_DEFAULT);
+    dispatch_async(imageLoadQueue,^{
+        UIImage *largeImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.largeImageURL]];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.photoView.image = largeImage;
+        });
+    });
     self.titleText.text = self.titleString;
 }
 

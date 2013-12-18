@@ -142,22 +142,12 @@
 #pragma mark - Photo Details
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([[segue identifier] isEqualToString:@"photoDetailSegue"]){
-        NSIndexPath *selectedIndexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
-
         PhotoDetailViewController *photoDetails = [segue destinationViewController];
 
+        NSIndexPath *selectedIndexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
         NSMutableDictionary *currentPhoto = [self.photos objectAtIndex:selectedIndexPath.row];
         photoDetails.titleString = [currentPhoto objectForKey:@"title"];
-
-        // cache large photo data
-        if([currentPhoto objectForKey:@"large_data"]){
-            photoDetails.largeImage = [UIImage imageWithData:[currentPhoto objectForKey:@"large_data"]];
-        } else {
-            NSData *largePhotoData = [NSData dataWithContentsOfURL:[currentPhoto objectForKey:@"large"]];
-            [currentPhoto setObject:largePhotoData forKey:@"large_data"];
-            UIImage *largeImage = [UIImage imageWithData:largePhotoData];
-            photoDetails.largeImage = largeImage;
-        }
+        photoDetails.largeImageURL = [currentPhoto objectForKey:@"large"];
     }
 }
 
