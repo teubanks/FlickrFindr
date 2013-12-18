@@ -15,4 +15,5 @@
 @property (strong, nonatomic) UISearchBar *searchBar;
 @property (strong, nonatomic) APIInterface *apiInterface;
 @property (strong, nonatomic) NSOperationQueue *imageFetchQueue;
+@property (strong, nonatomic) UIActivityIndicatorView *fetchingPhotosIndicator;
 @end

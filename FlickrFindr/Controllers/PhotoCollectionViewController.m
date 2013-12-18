@@ -42,6 +42,9 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch)];
     [self.navigationItem setRightBarButtonItem:rightButton];
 
+    self.fetchingPhotosIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.fetchingPhotosIndicator setFrame:self.view.frame];
+
     CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
 
     self.hiddenSearchBarFrame = CGRectMake(0, -44, self.view.bounds.size.width, 44);
@@ -55,6 +58,7 @@
     [self.darkeningView setBackgroundColor:[UIColor grayColor]];
     UITapGestureRecognizer *dismissTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSearch)];
     [self.darkeningView addGestureRecognizer:dismissTap];
+    [self showSearch];
 }
 
 #pragma mark - Search
@@ -84,6 +88,8 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.apiInterface searchPhotosWithText:searchBar.text];
+    [self.view addSubview:self.fetchingPhotosIndicator];
+    [self.fetchingPhotosIndicator startAnimating];
     [self dismissSearch];
 }
 
@@ -91,6 +97,8 @@
 -(void)returnedPhotos:(NSArray *)photoURLs {
     self.photos = photoURLs;
     [self.collectionView reloadData];
+    [self.fetchingPhotosIndicator stopAnimating];
+    [self.fetchingPhotosIndicator removeFromSuperview];
 }
 
 #pragma mark - Collection View Delegate
@@ -123,10 +131,14 @@
 
 #pragma mark - Photo Details
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([[sender identifier] isEqualToString:@"photoDetailSegue"]){
-        PhotoDetailViewController *photoDetails = (PhotoDetailViewController*)[segue destinationViewController];
-        [photoDetails.photoView setImage:[UIImage imageNamed:@"placeholder"]];
-        photoDetails.titleText.text = @"placeholder";
+    if([[segue identifier] isEqualToString:@"photoDetailSegue"]){
+        NSIndexPath *selectedIndexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
+
+        NSDictionary *currentPhoto = [self.photos objectAtIndex:selectedIndexPath.row];
+        PhotoDetailViewController *photoDetails = [segue destinationViewController];
+        UIImage *largeImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[currentPhoto objectForKey:@"large"]]];
+        photoDetails.largeImage = largeImage;
+        photoDetails.titleString = [currentPhoto objectForKey:@"title"];
     }
 }
 

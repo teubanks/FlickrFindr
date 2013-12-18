@@ -11,5 +11,6 @@
 @interface PhotoDetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
 @property (weak, nonatomic) IBOutlet UITextView *titleText;
-
+@property (strong, nonatomic) UIImage *largeImage;
+@property (strong, nonatomic) NSString *titleString;
 @end

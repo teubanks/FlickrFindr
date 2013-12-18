@@ -18,4 +18,9 @@
     }
     return self;
 }
+
+-(void)prepareForReuse {
+    self.thumbnail.image = nil;
+    self.shortTitle.text = @"";
+}
 @end
