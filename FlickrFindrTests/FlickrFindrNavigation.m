@@ -6,19 +6,19 @@
 //  Copyright (c) 2013 Tracey Eubanks. All rights reserved.
 //
 
-#import <KIF/KIF.h>
+#import "FlickrFindrNavigation.h"
 
-@interface FlickrFindrNavigation : KIFTestCase
+@implementation FlickrFindrNavigationTests
 
-@end
-
-@implementation FlickrFindrNavigation
-
-
-- (void)testSearch {
-    [tester enterText:@"Bleh" intoViewWithAccessibilityLabel:@"search bar"];
-    [tester tapViewWithAccessibilityLabel:@"done"];
+-(void)beforeAll {
+    [tester enterText:@"Green" intoViewWithAccessibilityLabel:@"search bar"];
+    [tester tapViewWithAccessibilityLabel:@"search"];
     [tester waitForViewWithAccessibilityLabel:@"photoCell"];
+}
+
+-(void)testDetailView {
+    [tester tapViewWithAccessibilityLabel:@"photoCell"];
+    [tester tapViewWithAccessibilityLabel:@"Green"];
 }
 
 @end

@@ -38,7 +38,7 @@
         [self.searchBar setAccessibilityLabel:@"search bar"];
         [self.searchBar setDelegate:self];
 
-       self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch)];
+        self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch)];
     }
     return self;
 }

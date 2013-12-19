@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AD0E713B1862713500472032 /* FlickrFindrNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0E713A1862713500472032 /* FlickrFindrNavigation.m */; };
+		AD503C2018627EB900A3DE61 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD503C1F18627EB900A3DE61 /* SenTestingKit.framework */; };
 		AD90382D1861FCFB0036D268 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD90382C1861FCFB0036D268 /* Foundation.framework */; };
 		AD90382F1861FCFB0036D268 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD90382E1861FCFB0036D268 /* CoreGraphics.framework */; };
 		AD9038311861FCFB0036D268 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9038301861FCFB0036D268 /* UIKit.framework */; };
@@ -17,7 +18,6 @@
 		AD9038401861FCFB0036D268 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD90383E1861FCFB0036D268 /* Main_iPhone.storyboard */; };
 		AD9038431861FCFB0036D268 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD9038411861FCFB0036D268 /* Main_iPad.storyboard */; };
 		AD9038481861FCFB0036D268 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD9038471861FCFB0036D268 /* Images.xcassets */; };
-		AD90384F1861FCFB0036D268 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD90384E1861FCFB0036D268 /* XCTest.framework */; };
 		AD9038501861FCFB0036D268 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD90382C1861FCFB0036D268 /* Foundation.framework */; };
 		AD9038511861FCFB0036D268 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9038301861FCFB0036D268 /* UIKit.framework */; };
 		AD9038591861FCFB0036D268 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD9038571861FCFB0036D268 /* InfoPlist.strings */; };
@@ -42,6 +42,9 @@
 		0F465A9BE3EE48FBBC7CCEAE /* libPods-FlickrFindrTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FlickrFindrTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2EC6F9CA3C4558A00EA195 /* Pods-FlickrFindrTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrFindrTests.xcconfig"; path = "Pods/Pods-FlickrFindrTests.xcconfig"; sourceTree = "<group>"; };
 		AD0E713A1862713500472032 /* FlickrFindrNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrFindrNavigation.m; sourceTree = "<group>"; };
+		AD503C1918627AFC00A3DE61 /* FlickrFindrNavigation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlickrFindrNavigation.h; sourceTree = "<group>"; };
+		AD503C1A18627CA400A3DE61 /* libPods-FlickrFindrTests-KIF.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "libPods-FlickrFindrTests-KIF.a"; path = "Pods/build/Debug-iphoneos/libPods-FlickrFindrTests-KIF.a"; sourceTree = "<group>"; };
+		AD503C1F18627EB900A3DE61 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		AD9038291861FCFB0036D268 /* FlickrFindr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrFindr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD90382C1861FCFB0036D268 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AD90382E1861FCFB0036D268 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -55,7 +58,7 @@
 		AD90383F1861FCFB0036D268 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		AD9038421861FCFB0036D268 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		AD9038471861FCFB0036D268 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		AD90384D1861FCFB0036D268 /* FlickrFindrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrFindrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD90384D1861FCFB0036D268 /* FlickrFindrTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrFindrTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD90384E1861FCFB0036D268 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		AD9038561861FCFB0036D268 /* FlickrFindrTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlickrFindrTests-Info.plist"; sourceTree = "<group>"; };
 		AD9038581861FCFB0036D268 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -84,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD90384F1861FCFB0036D268 /* XCTest.framework in Frameworks */,
+				AD503C2018627EB900A3DE61 /* SenTestingKit.framework in Frameworks */,
 				AD9038511861FCFB0036D268 /* UIKit.framework in Frameworks */,
 				AD9038501861FCFB0036D268 /* Foundation.framework in Frameworks */,
 				C8300010B4DF43A1A043D833 /* libPods-FlickrFindrTests.a in Frameworks */,
@@ -109,7 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				AD9038291861FCFB0036D268 /* FlickrFindr.app */,
-				AD90384D1861FCFB0036D268 /* FlickrFindrTests.xctest */,
+				AD90384D1861FCFB0036D268 /* FlickrFindrTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,6 +120,8 @@
 		AD90382B1861FCFB0036D268 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD503C1F18627EB900A3DE61 /* SenTestingKit.framework */,
+				AD503C1A18627CA400A3DE61 /* libPods-FlickrFindrTests-KIF.a */,
 				AD90382C1861FCFB0036D268 /* Foundation.framework */,
 				AD90382E1861FCFB0036D268 /* CoreGraphics.framework */,
 				AD9038301861FCFB0036D268 /* UIKit.framework */,
@@ -156,6 +161,7 @@
 			children = (
 				AD9038551861FCFB0036D268 /* Supporting Files */,
 				AD0E713A1862713500472032 /* FlickrFindrNavigation.m */,
+				AD503C1918627AFC00A3DE61 /* FlickrFindrNavigation.h */,
 			);
 			path = FlickrFindrTests;
 			sourceTree = "<group>";
@@ -237,7 +243,7 @@
 			);
 			name = FlickrFindrTests;
 			productName = FlickrFindrTests;
-			productReference = AD90384D1861FCFB0036D268 /* FlickrFindrTests.xctest */;
+			productReference = AD90384D1861FCFB0036D268 /* FlickrFindrTests.octest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -516,7 +522,7 @@
 				INFOPLIST_FILE = "FlickrFindrTests/FlickrFindrTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
+				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -536,7 +542,7 @@
 				INFOPLIST_FILE = "FlickrFindrTests/FlickrFindrTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
+				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

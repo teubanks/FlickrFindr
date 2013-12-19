@@ -40,6 +40,12 @@
         });
     });
     self.titleText.text = self.titleString;
+
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.navigationController.navigationItem.backBarButtonItem setAccessibilityLabel:@"back"];
 }
 
 @end
