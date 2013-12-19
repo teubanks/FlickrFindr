@@ -35,6 +35,7 @@
         [self.darkeningView setBackgroundColor:[UIColor grayColor]];
         [self.darkeningView addGestureRecognizer:dismissTap];
         self.searchBar = [[UISearchBar alloc] initWithFrame:self.hiddenSearchBarFrame];
+        [self.searchBar setAccessibilityLabel:@"search bar"];
         [self.searchBar setDelegate:self];
 
        self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearch)];
@@ -117,6 +118,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
+    [cell setAccessibilityLabel:@"photoCell"];
 
     NSMutableDictionary *currentPhoto = [self.photos objectAtIndex:indexPath.row];
 
