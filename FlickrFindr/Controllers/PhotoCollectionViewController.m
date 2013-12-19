@@ -91,6 +91,7 @@
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.navigationItem setTitle:searchBar.text];
     [self.apiInterface searchPhotosWithText:searchBar.text];
     [self.view addSubview:self.fetchingPhotosIndicator];
     [self.fetchingPhotosIndicator startAnimating];
